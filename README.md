@@ -1,4 +1,4 @@
-# Wesley Lim — Personal Portfolio
+#Welcome to my Personal Portfolio!
 
 ## Built With
 - React
