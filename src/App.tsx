@@ -1,8 +1,30 @@
 import { useEffect, useRef, useState } from 'react'
 import court from './assets/portfolio/red-home-court-basic-markings.png'
+import graduationPhoto from './assets/portfolio/wes-tux.jpeg'
 import './App.css'
 
 const sections = ['About', 'Projects', 'Experience', 'Skills', 'Contact']
+const skillGroups = [
+  { category: 'Languages', skills: [
+    { name: 'Python', icon: 'python' },
+    { name: 'Java', icon: 'java' },
+    { name: 'C', icon: 'c' },
+  ] },
+  { category: 'Frameworks & Libraries', skills: [
+    { name: 'React', icon: 'react' },
+    { name: 'FastAPI', icon: 'fastapi' },
+    { name: 'Streamlit', icon: 'streamlit' },
+  ] },
+  { category: 'Tools & Technologies', skills: [
+    { name: 'Git', icon: 'git' },
+    { name: 'GitHub', icon: 'github' },
+    { name: 'REST APIs', icon: 'rest-api' },
+    { name: 'VS Code', icon: 'vscode' },
+    { name: 'Eclipse', icon: 'eclipse' },
+    { name: 'PyCharm', icon: 'pycharm' },
+    { name: 'macOS/Linux Command Line', icon: 'terminal' },
+  ] },
+]
 type IntroPhase = 'intro' | 'revealing' | 'ready'
 
 function playMenuSound() {
@@ -150,16 +172,46 @@ function App() {
         </section>
 
         <section id="about" className="portfolio-section about-section" aria-labelledby="about-title">
-          <p className="section-eyebrow"><span>01</span> OFF THE COURT</p>
+          <p className="section-eyebrow"><span>01</span>ABOUT ME</p>
           <h2 id="about-title">Hard Worker.<br />Problem Solver.<br />Team Player.</h2>
-          <div className="about-copy"><p>Hi! I’m Wes, a Computer Science student at the University of Maryland. I enjoy building applications that solve problems and 
-            exploring what’s possible with artificial intelligence.</p><p>This is my personal portfolio for the things I've built, the skills I've learned, and whatever comes next.</p><span className="profile-tag"><i /> MARYLAND · COMPUTER SCIENCE</span></div>
+          <div className="about-copy">
+            <p>Hi! I’m Wes, a Computer Science student at the University of Maryland. I enjoy building practical applications, exploring artificial intelligence, and turning ideas into working software.</p>
+            <p>In my free time I love to play basketball and watch movies!</p>
+          </div>
+          <img className="about-photo" src={graduationPhoto} alt="Wesley Lim’s graduation portrait in a tuxedo against a blue backdrop" width="2375" height="2973" loading="lazy" decoding="async" />
         </section>
 
         <section id="projects" className="portfolio-section content-section" aria-labelledby="projects-title"><p className="section-eyebrow"><span>02</span>PROJECTS</p><div className="section-heading"><h2 id="projects-title">Projects</h2><span aria-hidden="true">↗</span></div></section>
         <section id="experience" className="portfolio-section content-section" aria-labelledby="experience-title"><p className="section-eyebrow"><span>03</span>EXPERIENCE</p><div className="section-heading"><h2 id="experience-title">Experience</h2><span aria-hidden="true">↗</span></div></section>
-        <section id="skills" className="portfolio-section skills-section" aria-labelledby="skills-title"><div><p className="section-eyebrow"><span>04</span>SKILLS</p><h2 id="skills-title">Always leveling up.</h2></div></section>
-        <section id="contact" className="portfolio-section contact-section" aria-labelledby="contact-title"><p className="section-eyebrow"><span>05</span>CONTACT</p><h2 id="contact-title">Good things start<br />with a team.</h2><a href="#home" onClick={menuSound}>BACK TO THE COURT <span aria-hidden="true">↑</span></a></section>
+        <section id="skills" className="portfolio-section skills-section" aria-labelledby="skills-title">
+          <div><p className="section-eyebrow"><span>04</span>SKILLS</p><h2 id="skills-title">Always leveling up.</h2></div>
+          <dl className="skills-details">
+            {skillGroups.map((group) => (
+              <div key={group.category}>
+                <dt>{group.category}</dt>
+                <dd><ul>{group.skills.map((skill) => (
+                  <li className="skill-card" key={skill.name}>
+                    <img className={`skill-icon${skill.icon === 'github' ? ' skill-icon-light' : ''}`} src={`/skill-icons/${skill.icon}.svg`} alt="" width="64" height="64" loading="lazy" decoding="async" />
+                    <span>{skill.name}</span>
+                  </li>
+                ))}</ul></dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+        <section id="contact" className="portfolio-section contact-section" aria-labelledby="contact-title">
+          <div className="contact-intro">
+            <p className="section-eyebrow"><span>05</span>CONTACT</p>
+            <h2 id="contact-title">Good things start<br />with a team.</h2>
+            <p className="contact-copy">I'm always looking for new opportunities to learn and grow. Feel free to reach out to me!</p>
+            <a className="back-to-court" href="#home" onClick={menuSound}>BACK TO THE COURT <span aria-hidden="true">↑</span></a>
+          </div>
+          <div className="contact-links">
+            <a href="mailto:wesley.a.lim@gmail.com" onClick={menuSound}>Email Me <span className="contact-arrow-up-right" aria-hidden="true">↓</span></a>
+            <a href="/wesley-lim-resume.pdf" download="Wesley Lim Resume.pdf" onClick={menuSound}>Download Resume <span aria-hidden="true">↓</span></a>
+            <a href="https://www.linkedin.com/in/wesley-lim-b122a3381" target="_blank" rel="noopener noreferrer" onClick={menuSound}>LinkedIn <span className="contact-arrow-up-right" aria-hidden="true">↓</span></a>
+          </div>
+        </section>
       </main>
     </div>
     {introActive && (
